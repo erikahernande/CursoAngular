@@ -15,4 +15,9 @@ export class AppComponent {
     
     this.resultado=this.numero1+this.numero2;
   }
+
+  restar():void{
+    
+    this.resultado=this.numero1-this.numero2;
+  }
 }
