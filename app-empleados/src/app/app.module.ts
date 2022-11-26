@@ -18,12 +18,15 @@ import { ErrorPersonalizadoComponent } from './error-personalizado/error-persona
 import { DataServices } from './data.services';
 import {HttpClientModule } from '@angular/common/http';
 import { LoginComponent } from './login/login.component';
+import { loginService } from './login/login.service';
+import { CookieService } from 'ngx-cookie-service';
+import { LoginGuardian } from './login/login-guardian';
 
 const appRoutes:Routes=[
   {path:'', component:HomeComponentComponent},
   {path:'proyectos', component:ProyectosComponentComponent},
   {path:'quienes', component:QuienesComponentComponent},
-  {path:'contacto', component:ContactoComponentComponent},
+  {path:'contacto', component:ContactoComponentComponent, canActivate:[LoginGuardian]},
   {path:'actualiza/:id', component:ActualizaComponent},
   {path:'login', component:LoginComponent},
   {path:'**', component:ErrorPersonalizadoComponent }
@@ -48,7 +51,7 @@ const appRoutes:Routes=[
     RouterModule.forRoot(appRoutes),
     HttpClientModule
   ],
-  providers: [ServicioEmpleadosService, EmpleadosService, DataServices],
+  providers: [ServicioEmpleadosService, EmpleadosService, DataServices, loginService, CookieService, LoginGuardian],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
